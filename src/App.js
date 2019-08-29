@@ -8,6 +8,7 @@ function App(props) {
     return <List key={idx} list={list} allCards={STORE.allCards}/>;
   })
   
+  
   return (
     <main className='App'>
       <header className="App-header">
@@ -17,7 +18,7 @@ function App(props) {
         {listItems};
       </div>
     </main>
-      );
+  );
 }
 
 export default App;

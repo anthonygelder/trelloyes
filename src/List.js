@@ -4,9 +4,12 @@ import './list.css';
 
 
 function List(props) {
-    const cards = props.list.cardIds.map(function(cardId, idx) {
+    let cards;
+    if ( props.list.cardIds) {
+    cards = props.list.cardIds.map(function(cardId, idx) {
         return <Card key={idx} card={props.allCards[cardId]}/>
     })
+    }   
 
     return (
         <section className='List'>
