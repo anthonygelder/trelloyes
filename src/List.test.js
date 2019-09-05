@@ -5,12 +5,15 @@ import STORE from './store';
 import List from './List';
 
 
+describe('List component', () => {
+    const list = {
+        cardIds: []
+    }
 
 
-
-    it('renders without crashing', () => {
+    it.only('renders without crashing', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<List key={1} list={'hello'} allCards={STORE.allCards}/>, div);
+        ReactDOM.render(<List key={1} list={list} allCards={STORE.allCards}/>, div);
     })
 
 
@@ -20,3 +23,5 @@ import List from './List';
         .toJSON(); 
         expect(tree).toMatchSnapshot(); 
     });
+
+})
