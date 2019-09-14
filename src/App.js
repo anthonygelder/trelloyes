@@ -4,10 +4,9 @@ import './app.css';
 import STORE from './store.js';
 
 function App(props) {
-  const listItems = STORE.lists.map(function(list, idx) {
-    return <List key={idx} list={list} allCards={STORE.allCards}/>;
+  const listItems = STORE.lists.map((list, idx) => {
+    return <List key={list.key} id={parseInt(list.id)} list={list} allCards={STORE.allCards}/>;
   })
-  
   
   return (
     <main className='App'>
@@ -15,7 +14,7 @@ function App(props) {
         <h1>Trelloyes!</h1>
       </header>
       <div className="App-list">
-        {listItems};
+        {listItems}
       </div>
     </main>
   );

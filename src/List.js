@@ -3,31 +3,60 @@ import Card from './Card.js'
 import './list.css';
 
 
+
+const newRandomCard = () => {
+    const id = Math.random().toString(36).substring(2, 4) + Math.random().toString(36).substring(2, 4);
+    return {
+        id,
+        title: `Random Card ${id}`,
+        content: 'lorem ipsum',
+    }
+}
+
 class List extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props)
         this.state = {
-            list: props.list,
-            allCards: props.allCards
-            // cardIds: props.
+            state = {
+                store: this.STORE
+            }
         }
     }
 
     deleteCard = (id) => {
-        const newCards = this.state.list.cardIds.filter((item) => {
+        const newCards = this.state.cardIds.filter((item) => {
             if (item === id) {
                 return false;
             }
             return true;
         })
-        console.log(this.state.list.cardIds, "card ids")
-        console.log(newCards, "new cards")
+
         this.setState({
             cardIds: newCards
-            // How can I set newCards to this.state.list.cardIds in here?
         })
     }
+
+
+    addCard = (listId) => {
+        const randomCard = newRandomCard();
+        const cards = this.state.allCards;
+        cards[randomCard.id] = randomCard;
+
+
+        const newCards = this.state.cardIds.map((listId, key) => {
+            if (parseInt(this.state.list.id) === key) {
+                this.state.cardIds.push(randomCard.id);
+            }
+            return this.state.cardIds
+        })
+        this.setState({
+            allCards: cards,
+            cardIds: newCards
+        })
+        console.log(this.state, "after");
+    }
+
+
 
     render() {
         return (
@@ -36,16 +65,16 @@ class List extends React.Component {
                     <h2>{this.state.list.header}</h2>
                 </header>
                 <div className="List-cards">
-                    {console.log(this.state.list.cardIds, "card ids2")}
-                    {this.state.list.cardIds.map((cardId, idx) => {
-                        
+                    {this.state.cardIds.map((cardId, idx) => {
                         return (
                             <Card 
                                 key={idx} 
                                 card={this.state.allCards[cardId]}
-                                handleClick={this.deleteCard} />)
+                                handleClick={this.deleteCard}/>)
                     })}
                 </div>
+                <button type="button" 
+                                onClick={() => { this.addCard(this.state.list.id)}}>Add random card</button>
             </div>
         );
     }
